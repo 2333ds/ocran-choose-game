@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ocean Game</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #game-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #slide-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      cursor: pointer;
+      display: block;
+    }
+    #score {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <img id="slide-img" src="" alt="slide" />
+    <div id="score">Current score: 0</div>
+  </div>
+
+  <script>
+    // -----------------------
+    // 全局变量
+    // -----------------------
+    let currentSlide = 1; // 当前是第几张 slide
+    let score = 0;        // 玩家分数
+
+    const imgEl = document.getElementById("slide-img");
+    const scoreEl = document.getElementById("score");
+
+    // -----------------------
+    // 显示当前 slide
+    // -----------------------
+    function showSlide() {
+      imgEl.src = "Slide" + currentSlide + ".PNG";
+      scoreEl.textContent = "Current score: " + score;
+    }
+
+    // -----------------------
+    // 点击图片时的逻辑
+    // -----------------------
+    imgEl.onclick = function (event) {
+      // 计算点击位置（只在选择题需要用到）
+      const rect = imgEl.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const width = rect.width;
+
+      // 为了写得简单，全部用 if / else
+      // Slide1: 介绍 → Slide2
+      if (currentSlide === 1) {
+        currentSlide = 2;
+      }
+      // Slide2: Ready to Play → Slide3
+      else if (currentSlide === 2) {
+        currentSlide = 3;
+      }
+      // ========= 问题 1 =========
+      // Slide3: 问题描述 → Slide4（选项）
+      else if (currentSlide === 3) {
+        currentSlide = 4;
+      }
+      // Slide4: 选项（左好右坏）
+      else if (currentSlide === 4) {
+        if (x < width / 2) {
+          // 左边：good choice
+          score = score + 1;
+          currentSlide = 5; // 好结局
+        } else {
+          // 右边：bad choice
+          score = score - 1;
+          currentSlide = 6; // 坏结局
+        }
+      }
+      // Slide5 / Slide6: 结果说明 → Slide7
+      else if (currentSlide === 5 || currentSlide === 6) {
+        currentSlide = 7;
+      }
+
+      // ========= 问题 2 =========
+      // Slide7: 问题描述 → Slide8
+      else if (currentSlide === 7) {
+        currentSlide = 8;
+      }
+      // Slide8: 选项（左好右坏）
+      else if (currentSlide === 8) {
+        if (x < width / 2) {
+          score = score + 1;
+          currentSlide = 9;
+        } else {
+          score = score - 1;
+          currentSlide = 10;
+        }
+      }
+      // Slide9 / 10: 结果 → Slide11
+      else if (currentSlide === 9 || currentSlide === 10) {
+        currentSlide = 11;
+      }
+
+      // ========= 问题 3 =========
+      // Slide11: 问题描述 → Slide12
+      else if (currentSlide === 11) {
+        currentSlide = 12;
+      }
+      // Slide12: 选项（左好右坏）
+      else if (currentSlide === 12) {
+        if (x < width / 2) {
+          score = score + 1;
+          currentSlide = 13;
+        } else {
+          score = score - 1;
+          currentSlide = 14;
+        }
+      }
+      // Slide13 / 14: 结果 → Slide15
+      else if (currentSlide === 13 || currentSlide === 14) {
+        currentSlide = 15;
+      }
+
+      // ========= 问题 4 =========
+      // Slide15: 问题描述 → Slide16
+      else if (currentSlide === 15) {
+        currentSlide = 16;
+      }
+      // Slide16: 选项（左好右坏）
+      else if (currentSlide === 16) {
+        if (x < width / 2) {
+          score = score + 1;
+          currentSlide = 17;
+        } else {
+          score = score - 1;
+          currentSlide = 18;
+        }
+      }
+      // Slide17 / 18: 结果 → Slide19
+      else if (currentSlide === 17 || currentSlide === 18) {
+        currentSlide = 19;
+      }
+
+      // ========= 问题 5 =========
+      // Slide19: 问题描述 → Slide20
+      else if (currentSlide === 19) {
+        currentSlide = 20;
+      }
+      // Slide20: 选项（左好右坏）
+      else if (currentSlide === 20) {
+        if (x < width / 2) {
+          score = score + 1;
+          currentSlide = 21;
+        } else {
+          score = score - 1;
+          currentSlide = 22;
+        }
+      }
+      // Slide21 / 22: 结果 → Slide23
+      else if (currentSlide === 21 || currentSlide === 22) {
+        currentSlide = 23;
+      }
+
+      // ========= 问题 6 =========
+      // Slide23: 问题描述 → Slide24
+      else if (currentSlide === 23) {
+        currentSlide = 24;
+      }
+      // Slide24: 选项（左好右坏）
+      else if (currentSlide === 24) {
+        if (x < width / 2) {
+          score = score + 1;
+          currentSlide = 25;
+        } else {
+          score = score - 1;
+          currentSlide = 26;
+        }
+      }
+      // Slide25 / 26: 结果 → Slide27
+      else if (currentSlide === 25 || currentSlide === 26) {
+        currentSlide = 27;
+      }
+
+      // ========= 选择结局 =========
+      // Slide27: "See your ending" → 根据分数跳结局
+      else if (currentSlide === 27) {
+        // 用最简单的 if/else 判断:
+        // 分数 >= 4 : Good Ending (Slide28)
+        // 0 ~ 3     : Normal Ending (Slide29)
+        // < 0       : Bad Ending (Slide30)
+        if (score >= 4) {
+          currentSlide = 28; // good
+        } else if (score >= 0) {
+          currentSlide = 29; // normal
+        } else {
+          currentSlide = 30; // bad
+        }
+      }
+
+      // ========= 结局 → 回到开头 =========
+      else if (currentSlide === 28 || currentSlide === 29 || currentSlide === 30) {
+        // 点击任何位置：重置 score，返回 Slide1
+        score = 0;
+        currentSlide = 1;
+      }
+
+      // 显示更新后的 slide
+      showSlide();
+    };
+
+    // 首次加载
+    showSlide();
+  </script>
+</body>
+</html>
